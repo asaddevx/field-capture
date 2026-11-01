@@ -2,6 +2,16 @@
 
 A React Native + TypeScript app for capturing field reports on construction sites with **no connectivity**. Reports (text, photos, a voice note, GPS) are saved to SQLite on the device first, then a background **sync engine** uploads them when the network returns. Each report shows its state: `Pending → Syncing → Synced`, or `Error` with automatic and manual retry.
 
+> [!NOTE]
+> **Scope: no login module, by design.**
+> This prototype concentrates on what the assignment asks for: offline capture, local persistence, visible sync states, and reliable retry. User authentication was left out on purpose to keep the demo focused.
+>
+> A production version would require workers to sign in. That matters on a real site for two reasons:
+> - **Attribution:** every report records the worker who submitted it, which is essential for accountability on site.
+> - **Ownership:** the server accepts an upload only from the report's author, so one worker cannot overwrite another's report.
+>
+> The current design already supports this. Every report has a unique ID generated on the device, so reports from different workers never collide. Adding login means attaching a signed token to each sync request and storing an `author_id` on the server. See [Trade-offs and next steps](#trade-offs-and-next-steps).
+
 | | |
 |---|---|
 | **Mobile** | Expo SDK 58 · React Native 0.88 · TypeScript (strict) · Expo Router · expo-sqlite · Zustand · Reanimated |
@@ -118,7 +128,7 @@ The server URL can also be changed at runtime under **Settings → Sync server**
 
 Deliberately out of scope for a prototype:
 
-- **Authentication.** The API is open. Next: device enrolment and a signed token per request.
+- **Authentication and attribution.** The API is currently open. Next: worker sign-in (for example, an email one-time code), a short-lived signed token sent with every sync request, the token kept in secure storage so offline capture still works after sign-in, an `author_id` on each report, and a server rule that only the author can update a report.
 - **Editing synced reports and conflict resolution.** Reports are immutable once captured, which suits field evidence. Supporting edits would need a version column with last-write-wins or a field-level merge.
 - **Sync while the app is closed.** Sync runs while the app is in the foreground or resumes. Next: `expo-background-task` to drain the outbox periodically.
 - **Large media.** Photos are downscaled to 1600 px JPEG (about 300 KB) and voice notes are mono AAC. Video would need chunked or resumable uploads.
