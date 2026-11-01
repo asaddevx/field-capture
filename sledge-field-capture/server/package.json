@@ -1,0 +1,21 @@
+{
+  "name": "sledge-field-capture-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply sledge-field-capture --local",
+    "db:migrate:remote": "wrangler d1 migrations apply sledge-field-capture --remote",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.13.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261031.1",
+    "typescript": "~6.0.3",
+    "wrangler": "^4.156.0"
+  }
+}

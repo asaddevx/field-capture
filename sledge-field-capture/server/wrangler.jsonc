@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sledge-field-capture",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sledge-field-capture",
+      // Replace with the id printed by `npx wrangler d1 create sledge-field-capture`
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "FILES",
+      // Replace with the id printed by `npx wrangler kv namespace create FILES`
+      "id": "REPLACE_WITH_KV_NAMESPACE_ID"
+    }
+  ]
+}

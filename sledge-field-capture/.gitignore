@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+
+# Cloudflare Workers local state
+server/.wrangler/
+server/.dev.vars
+
+# Local env
+.env
+.env.local
