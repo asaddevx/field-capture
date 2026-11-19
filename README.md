@@ -1,4 +1,4 @@
-# Field Capture: offline-first site reporting
+# Field Capture: offline-first site reporting:
 
 A React Native + TypeScript app for capturing field reports on construction sites with **no connectivity**. Reports (text, photos, a voice note, GPS) are saved to SQLite on the device first, then a background **sync engine** uploads them when the network returns. Each report shows its state: `Pending → Syncing → Synced`, or `Error` with automatic and manual retry.
 
