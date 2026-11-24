@@ -30,7 +30,7 @@ A React Native + TypeScript app for capturing field reports on construction site
 - **Retry**: exponential backoff for transient failures, an immediate retry when connectivity returns, and manual **Retry** / **Retry all**.
 - **Developer tools** (Settings): simulate a server outage (503) or add latency, to demonstrate the failure and retry paths.
 
-## Architecture
+## Architecture:
 
 ```mermaid
 flowchart LR
